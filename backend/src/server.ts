@@ -3,7 +3,7 @@ import express from "express";
 import { db } from "./db";
 import { sql } from "drizzle-orm";
 
-const PORT = Number(process.env.PORT);
+const PORT = Number(process.env.PORT) || 8000;
 const app = express();
 
 app.get("/health", async (_, res) => {
