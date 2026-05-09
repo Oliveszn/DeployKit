@@ -2,9 +2,13 @@ import "dotenv/config";
 import express from "express";
 import { db } from "./db";
 import { sql } from "drizzle-orm";
+import "./db/migrate";
+import { deploymentRouter } from "./routes/deploymentRoute";
 
 const PORT = Number(process.env.PORT) || 8000;
 const app = express();
+
+app.use("/api/deployments", deploymentRouter);
 
 app.get("/health", async (_, res) => {
   try {
@@ -25,6 +29,6 @@ app.get("/health", async (_, res) => {
   }
 });
 
-app.listen(PORT, () => {
+app.listen(PORT, "0.0.0.0", () => {
   console.log(`Server is running at ${PORT}`);
 });
